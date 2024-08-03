@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const Card = (props) => {
-  const { store, actions } = useContext(Context);
+const CardFavorites = (props) => {
+  const { actions } = useContext(Context);
 
   return (
     <div className="card">
@@ -15,16 +15,16 @@ const Card = (props) => {
         <h5 className="card-title">{props.name}</h5>
         <button
           type="button"
-          className="btn btn-warning"
+          className="btn btn-danger"
           onClick={() => {
-            actions.saveToFav(props.uid, props.type);
+            actions.removeFromFav(props.uid);
           }}
         >
-          Add to Favorites
+          Remove from Favorites
         </button>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default CardFavorites;

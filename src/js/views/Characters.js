@@ -1,26 +1,30 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import Card from '../component/Card';
-
+import Card from "../component/Card";
 
 function Characters() {
-    const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-    useEffect(() => {
-        actions.getCharacters();
-      }, []);
+  useEffect(() => {
+    actions.getCharacters();
+  }, []);
 
   return (
-    <div className='row mx-3'>
-      {store.characters?.map((character) => (
-        <div key={character.uid} className='col-3 my-3'>
-          <Card 
-          name = {character.name}
-          />
-        </div>
-      ))}
-    </div>
-  )
+    <>
+      <div>
+        <h2>
+          These are the main <strong>characters</strong> from Star Wars:
+        </h2>
+      </div>
+      <div className="row mx-3">
+        {store.characters?.map((character) => (
+          <div key={character.uid} className="col-3 my-3">
+            <Card name={character.name} uid={character.uid} type="characters"  />
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
 
-export default Characters
+export default Characters;
