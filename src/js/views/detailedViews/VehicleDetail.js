@@ -11,11 +11,17 @@ const VehicleDetail = () => {
   }, [uid]);
 
   if (store.loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border star-wars-spinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   if (!store.vehicle) {
-    return <div>Vehicle not found</div>;
+    return <div className="container mt-5 alert alert-danger">Vehicle not found</div>;
   }
 
   const {
@@ -33,19 +39,27 @@ const VehicleDetail = () => {
   } = store.vehicle.properties;
 
   return (
-    <div className="container">
-      <h1>{name}</h1>
-      <p><strong>Model:</strong> {model}</p>
-      <p><strong>Manufacturer:</strong> {manufacturer}</p>
-      <p><strong>Cost in Credits:</strong> {cost_in_credits}</p>
-      <p><strong>Length:</strong> {length}</p>
-      <p><strong>Max Atmosphering Speed:</strong> {max_atmosphering_speed}</p>
-      <p><strong>Crew:</strong> {crew}</p>
-      <p><strong>Passengers:</strong> {passengers}</p>
-      <p><strong>Cargo Capacity:</strong> {cargo_capacity}</p>
-      <p><strong>Consumables:</strong> {consumables}</p>
-      <p><strong>Vehicle Class:</strong> {vehicle_class}</p>
-      <p><strong>Description:</strong> {store.vehicle.description}</p>
+    <div className="container mt-5">
+      <div className="star-wars-card p-4">
+        <h1 className="star-wars-title text-center mb-4">{name}</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Model:</span> {model}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Manufacturer:</span> {manufacturer}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Cost in Credits:</span> {cost_in_credits}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Length:</span> {length}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Max Atmosphering Speed:</span> {max_atmosphering_speed}</p>
+          </div>
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Crew:</span> {crew}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Passengers:</span> {passengers}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Cargo Capacity:</span> {cargo_capacity}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Consumables:</span> {consumables}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Vehicle Class:</span> {vehicle_class}</p>
+          </div>
+        </div>
+        <p className="star-wars-text mt-4"><span className="star-wars-subtitle">Description:</span> {store.vehicle.description}</p>
+      </div>
     </div>
   );
 };

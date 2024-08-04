@@ -11,14 +11,19 @@ const PlanetDetail = () => {
   }, [uid]);
 
   if (store.loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border star-wars-spinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   if (!store.planet) {
-    return <div>Planet not found</div>;
+    return <div className="container mt-5 alert alert-danger">Planet not found</div>;
   }
 
-  // Destructuring properties for easier access
   const {
     name,
     diameter,
@@ -32,17 +37,25 @@ const PlanetDetail = () => {
   } = store.planet.properties;
 
   return (
-    <div className="container">
-      <h1>{name}</h1>
-      <p><strong>Diameter:</strong> {diameter}</p>
-      <p><strong>Rotation Period:</strong> {rotation_period}</p>
-      <p><strong>Orbital Period:</strong> {orbital_period}</p>
-      <p><strong>Gravity:</strong> {gravity}</p>
-      <p><strong>Population:</strong> {population}</p>
-      <p><strong>Climate:</strong> {climate}</p>
-      <p><strong>Terrain:</strong> {terrain}</p>
-      <p><strong>Surface Water:</strong> {surface_water}</p>
-      <p><strong>Description:</strong> {store.planet.description}</p>
+    <div className="container mt-5">
+      <div className="star-wars-card p-4">
+        <h1 className="star-wars-title text-center mb-4">{name}</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Diameter:</span> {diameter}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Rotation Period:</span> {rotation_period}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Orbital Period:</span> {orbital_period}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Gravity:</span> {gravity}</p>
+          </div>
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Population:</span> {population}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Climate:</span> {climate}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Terrain:</span> {terrain}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Surface Water:</span> {surface_water}</p>
+          </div>
+        </div>
+        <p className="star-wars-text mt-4"><span className="star-wars-subtitle">Description:</span> {store.planet.description}</p>
+      </div>
     </div>
   );
 };

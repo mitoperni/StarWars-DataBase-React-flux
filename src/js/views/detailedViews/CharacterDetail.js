@@ -1,40 +1,42 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../../store/appContext";
-import axios from "axios";
 
 const CharacterDetail = () => {
   const { uid } = useParams();
   const { store, actions } = useContext(Context);
 
-
   useEffect(() => {
     const getDataFromAPI = async () => {
-        await actions.getCharacterDetails(uid);
+      await actions.getCharacterDetails(uid);
     }
-      getDataFromAPI();
-    
-    }, [uid]);
+    getDataFromAPI();
+  }, [uid]);
 
-    useEffect(()=> {
-        const getHomeworldNameFromAPI = async (homeworldUrl) => {
-            await actions.getHomeWorldName(homeworldUrl)
-          };
-            
-          if (store.character && store.character.properties) {
-            getHomeworldNameFromAPI(store.character.properties.homeworld);
-          }
-    },[store.character])
+  useEffect(() => {
+    const getHomeworldNameFromAPI = async (homeworldUrl) => {
+      await actions.getHomeWorldName(homeworldUrl)
+    };
+      
+    if (store.character && store.character.properties) {
+      getHomeworldNameFromAPI(store.character.properties.homeworld);
+    }
+  }, [store.character])
 
   if (store.loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border star-wars-spinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   if (!store.character) {
-    return <div>Character not found</div>;
+    return <div className="container mt-5 alert alert-danger">Character not found</div>;
   }
 
-  // Destructure properties for easier access
   const {
     name,
     height,
@@ -48,18 +50,29 @@ const CharacterDetail = () => {
   } = store.character.properties;
 
   return (
-    <div className="container">
-      <h1>{name}</h1>
-      <p><strong>Height:</strong> {height}</p>
-      <p><strong>Mass:</strong> {mass}</p>
-      <p><strong>Hair Color:</strong> {hair_color}</p>
-      <p><strong>Skin Color:</strong> {skin_color}</p>
-      <p><strong>Eye Color:</strong> {eye_color}</p>
-      <p><strong>Birth Year:</strong> {birth_year}</p>
-      <p><strong>Gender:</strong> {gender}</p>
-      <p><strong>Homeworld:</strong> {store.homeworld || "Loading..."}</p>
-      <p><strong>URL:</strong> <a href={url} target="_blank" rel="noopener noreferrer">{url}</a></p>
-      <p><strong>Description:</strong> {store.character.description}</p>
+    <div className="container mt-5">
+      <div className="star-wars-card p-4">
+        <h1 className="star-wars-title text-center mb-4">{name}</h1>
+        <div className="row">
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Height:</span> {height}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Mass:</span> {mass}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Hair Color:</span> {hair_color}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Skin Color:</span> {skin_color}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Eye Color:</span> {eye_color}</p>
+          </div>
+          <div className="col-md-6">
+            <p className="star-wars-text"><span className="star-wars-subtitle">Birth Year:</span> {birth_year}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Gender:</span> {gender}</p>
+            <p className="star-wars-text"><span className="star-wars-subtitle">Homeworld:</span> {store.homeworld || "Loading..."}</p>
+            <p className="star-wars-text">
+              <span className="star-wars-subtitle">URL:</span> 
+              <a href={url} target="_blank" rel="noopener noreferrer" className="star-wars-link ml-2">{url}</a>
+            </p>
+          </div>
+        </div>
+        <p className="star-wars-text mt-4"><span className="star-wars-subtitle">Description:</span> {store.character.description}</p>
+      </div>
     </div>
   );
 };

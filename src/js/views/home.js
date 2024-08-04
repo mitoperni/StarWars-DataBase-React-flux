@@ -8,8 +8,8 @@ const Home = () => {
   return (
     <div className="text-center mt-5">
       <div className="my-5">
-        <h1>Hello Star Wars fan!!</h1>
-        <h2>
+        <h1 className="star-wars-title">Hello Star Wars fan!!</h1>
+        <h2 className="star-wars-subtitle">
           Here you have a database with the main characters, vehicles and
           planets.
         </h2>
@@ -69,4 +69,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;

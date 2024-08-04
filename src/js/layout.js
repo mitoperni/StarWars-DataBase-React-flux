@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
@@ -11,12 +11,20 @@ import CharacterDetail from "./views/detailedViews/CharacterDetail.js";
 import VehicleDetail from "./views/detailedViews/VehicleDetail.js";
 import PlanetDetail from "./views/detailedViews/PlanetDetail.js";
 
-import injectContext from "./store/appContext";
+import injectContext, { Context } from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
 const Layout = () => {
+  const { actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.getCharacters();
+    actions.getVehicles();
+    actions.getPlanets();
+  }, []);
+
   return (
     <div>
       <BrowserRouter>

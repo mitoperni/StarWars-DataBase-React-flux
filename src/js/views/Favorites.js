@@ -8,8 +8,8 @@ function Favorites() {
   return (
     <>
       <div className="mx-4">
-        <h2>
-          These are your <strong>favorites</strong> from Star Wars:
+      <h2 className="star-wars-title">
+      These are your <strong>favorites</strong> from Star Wars:
         </h2>
       </div>
       <div className="row mx-3">

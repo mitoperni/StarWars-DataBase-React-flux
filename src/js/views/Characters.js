@@ -12,8 +12,8 @@ function Characters() {
   return (
     <>
       <div className="mx-4">
-        <h2>
-          These are the main <strong>characters</strong> from Star Wars:
+      <h2 className="star-wars-title">
+      These are the main <strong>characters</strong> from Star Wars:
         </h2>
       </div>
       <div className="row mx-3">

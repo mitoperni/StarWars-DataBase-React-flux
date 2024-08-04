@@ -7,7 +7,7 @@ const Card = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="card">
+    <div className="card star-wars-card">
       <img
         className="card-img-top img-fluid"
         src="https://placehold.co/400"
@@ -16,7 +16,7 @@ const Card = (props) => {
         style={{ cursor: "pointer" }}
       />
       <div className="card-body">
-        <h5 className="card-title">{props.name}</h5>
+        <h5 className="card-title star-wars-title">{props.name}</h5>
         <div className="row d-flex justify-content-between align-items-center">
           <button
             type="button"

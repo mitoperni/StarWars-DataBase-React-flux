@@ -1,13 +1,41 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import starWarsLogo from "../../img/star-wars-logo.png"; 
+import starWarsLogo from "../../img/star-wars-logo.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchTerm.length > 1) {
+      const results = [
+        ...store.characters.filter(char => char.name.toLowerCase().includes(searchTerm.toLowerCase())),
+        ...store.vehicles.filter(vehicle => vehicle.name.toLowerCase().includes(searchTerm.toLowerCase())),
+        ...store.planets.filter(planet => planet.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      ];
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchTerm, store.characters, store.vehicles, store.planets]);
+
+  const handleSearch = (item) => {
+    setSearchTerm("");
+    setSearchResults([]);
+    if (store.characters.find(char => char.uid === item.uid)) {
+      navigate(`/characters/${item.uid}`);
+    } else if (store.vehicles.find(vehicle => vehicle.uid === item.uid)) {
+      navigate(`/vehicles/${item.uid}`);
+    } else if (store.planets.find(planet => planet.uid === item.uid)) {
+      navigate(`/planets/${item.uid}`);
+    }
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3 px-3">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3 px-3">
       <Link to="/" className="navbar-brand">
         <img src={starWarsLogo} alt="Star Wars Logo" height="50" />
       </Link>
@@ -25,17 +53,42 @@ export const Navbar = () => {
       <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/characters" className="nav-link">
+            <div className="position-relative">
+              <input
+                type="text"
+                className="form-control bg-dark text-light"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchResults.length > 0 && (
+                <ul className="list-group position-absolute w-100" style={{zIndex: 1000}}>
+                  {searchResults.map((item) => (
+                    <li
+                      key={item.uid}
+                      className="list-group-item bg-dark text-light"
+                      onClick={() => handleSearch(item)}
+                      style={{cursor: 'pointer'}}
+                    >
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </li>
+          <li className="nav-item">
+            <Link to="/characters" className="nav-link text-light">
               Characters
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/vehicles" className="nav-link">
+            <Link to="/vehicles" className="nav-link text-light">
               Vehicles
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/planets" className="nav-link">
+            <Link to="/planets" className="nav-link text-light">
               Planets
             </Link>
           </li>
@@ -43,19 +96,19 @@ export const Navbar = () => {
             <div className="btn-group d-flex flex-column">
               <button
                 type="button"
-                className="btn btn-primary dropdown-toggle"
+                className="btn btn-warning dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Favorites
               </button>
-              <ul className="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
+              <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-lg-end">
                 {store.favorites.length === 0 ? (
-                  <li className="dropdown-item">No favorites</li>
+                  <li className="dropdown-item text-light">No favorites</li>
                 ) : (
                   store.favorites.map((fav, index) => (
                     <li className="dropdown-item d-flex justify-content-between align-items-center" key={index}>
-                      {fav.name}
+                      <span className="text-light">{fav.name}</span>
                       <button
                         type="button"
                         className="btn btn-danger btn-sm ms-2"
@@ -67,7 +120,7 @@ export const Navbar = () => {
                   ))
                 )}
                 <li>
-                  <Link to="/favorites" className="dropdown-item text-center">
+                  <Link to="/favorites" className="dropdown-item text-center text-light">
                     View All
                   </Link>
                 </li>
