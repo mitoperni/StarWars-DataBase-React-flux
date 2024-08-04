@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import "../../styles/home.css";
 
-export const Home = () => {
+const Home = () => {
   const navigate = useNavigate();
 
   return (
@@ -68,3 +68,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home
