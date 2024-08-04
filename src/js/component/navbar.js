@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import starWarsLogo from "../../img/star-wars-logo.png";
+import starWarsLogo from "../../img/pngwing.com.png";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -12,9 +12,15 @@ export const Navbar = () => {
   useEffect(() => {
     if (searchTerm.length > 1) {
       const results = [
-        ...store.characters.filter(char => char.name.toLowerCase().includes(searchTerm.toLowerCase())),
-        ...store.vehicles.filter(vehicle => vehicle.name.toLowerCase().includes(searchTerm.toLowerCase())),
-        ...store.planets.filter(planet => planet.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        ...store.characters
+          .filter((char) => char.name.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map((char) => ({ ...char, type: 'character' })),
+        ...store.vehicles
+          .filter((vehicle) => vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map((vehicle) => ({ ...vehicle, type: 'vehicle' })),
+        ...store.planets
+          .filter((planet) => planet.name.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map((planet) => ({ ...planet, type: 'planet' })),
       ];
       setSearchResults(results);
     } else {
@@ -25,19 +31,29 @@ export const Navbar = () => {
   const handleSearch = (item) => {
     setSearchTerm("");
     setSearchResults([]);
-    if (store.characters.find(char => char.uid === item.uid)) {
-      navigate(`/characters/${item.uid}`);
-    } else if (store.vehicles.find(vehicle => vehicle.uid === item.uid)) {
-      navigate(`/vehicles/${item.uid}`);
-    } else if (store.planets.find(planet => planet.uid === item.uid)) {
-      navigate(`/planets/${item.uid}`);
+    switch (item.type) {
+      case 'character':
+        navigate(`/characters/${item.uid}`);
+        break;
+      case 'vehicle':
+        navigate(`/vehicles/${item.uid}`);
+        break;
+      case 'planet':
+        navigate(`/planets/${item.uid}`);
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3 px-3">
       <Link to="/" className="navbar-brand">
-        <img src={starWarsLogo} alt="Star Wars Logo" height="50" />
+        <img
+          src={starWarsLogo}
+          alt="Death Star png"
+          height="60"
+        />
       </Link>
       <button
         className="navbar-toggler"
@@ -50,7 +66,10 @@ export const Navbar = () => {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <div
+        className="collapse navbar-collapse justify-content-end"
+        id="navbarNav"
+      >
         <ul className="navbar-nav">
           <li className="nav-item">
             <div className="position-relative">
@@ -62,13 +81,16 @@ export const Navbar = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchResults.length > 0 && (
-                <ul className="list-group position-absolute w-100" style={{zIndex: 1000}}>
+                <ul
+                  className="list-group position-absolute w-100"
+                  style={{ zIndex: 1000 }}
+                >
                   {searchResults.map((item) => (
                     <li
                       key={item.uid}
                       className="list-group-item bg-dark text-light"
                       onClick={() => handleSearch(item)}
-                      style={{cursor: 'pointer'}}
+                      style={{ cursor: "pointer" }}
                     >
                       {item.name}
                     </li>
@@ -107,7 +129,10 @@ export const Navbar = () => {
                   <li className="dropdown-item text-light">No favorites</li>
                 ) : (
                   store.favorites.map((fav, index) => (
-                    <li className="dropdown-item d-flex justify-content-between align-items-center" key={index}>
+                    <li
+                      className="dropdown-item d-flex justify-content-between align-items-center"
+                      key={index}
+                    >
                       <span className="text-light">{fav.name}</span>
                       <button
                         type="button"
@@ -120,7 +145,10 @@ export const Navbar = () => {
                   ))
                 )}
                 <li>
-                  <Link to="/favorites" className="dropdown-item text-center text-light">
+                  <Link
+                    to="/favorites"
+                    className="dropdown-item text-center text-light"
+                  >
                     View All
                   </Link>
                 </li>

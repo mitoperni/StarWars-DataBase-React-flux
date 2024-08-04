@@ -5,7 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 body {
-  background-image: url('https://wallpaperaccess.com/full/11801.jpg');
+  /* background-image: url("https://wallpapercave.com/wp/cMfbDRr.jpg"); */
+  background-image: url("https://wallpapercave.com/wp/ItmVuT6.jpg");
   background-size: cover;
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
@@ -26,10 +27,19 @@ body {
   text-shadow: 0 0 10px #feda4a;
 }
 
+.star-wars-footer {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #feda4a;
+}
+
 .star-wars-subtitle {
   color: #5ac5d6;
   font-size: 1.2rem;
   text-transform: uppercase;
+  text-shadow: 0 0 10px #91e0ec;
+
 }
 
 .star-wars-text {
@@ -51,4 +61,16 @@ body {
   color: #feda4a;
   width: 3rem;
   height: 3rem;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  margin-top: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-top: 2px solid #feda4a;
 }

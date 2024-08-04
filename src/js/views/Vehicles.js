@@ -16,7 +16,7 @@ function Vehicles() {
       These are the main <strong>vehicles</strong> from Star Wars:
         </h2>
       </div>
-      <div className="row mx-3">
+      <div className="row mx-3 mt-3">
         {store.vehicles?.map((vehicle) => (
           <div
             key={vehicle.uid}

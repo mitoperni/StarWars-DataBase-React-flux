@@ -8,14 +8,13 @@ const Home = () => {
   return (
     <div className="text-center mt-5">
       <div className="my-5">
-        <h1 className="star-wars-title">Hello Star Wars fan!!</h1>
+        <h1 className="star-wars-title">Hello Star Wars fan</h1>
         <h2 className="star-wars-subtitle">
-          Here you have a database with the main characters, vehicles and
-          planets.
+          Begin your search into the force
         </h2>
       </div>
 
-      <div className="row mx-4 my-4">
+      {/* <div className="row mx-4 my-4">
         <div className="col-4 max-h-img">
           <img
             src="https://static1.therichestimages.com/wordpress/wp-content/uploads/2019/12/00-Star-Wars_-The-Main-Characters-Real-Life-Ages-and-Relationship-Statuses.jpg"
@@ -64,7 +63,7 @@ const Home = () => {
             Go to planets
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

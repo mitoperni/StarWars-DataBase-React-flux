@@ -26,25 +26,27 @@ const Layout = () => {
   }, []);
 
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <BrowserRouter>
         <ScrollToTop>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
+          <main className="flex-grow-1 mb-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-            <Route path="/characters" element={<Characters />} />
-            <Route path="/vehicles" element={<Vehicles />} />
-            <Route path="/planets" element={<Planets />} />
+              <Route path="/characters" element={<Characters />} />
+              <Route path="/vehicles" element={<Vehicles />} />
+              <Route path="/planets" element={<Planets />} />
 
-            <Route path="/favorites" element={<Favorites />} />
+              <Route path="/favorites" element={<Favorites />} />
 
-            <Route path="/characters/:uid" element={<CharacterDetail />} />
-            <Route path="/vehicles/:uid" element={<VehicleDetail />} />
-            <Route path="/planets/:uid" element={<PlanetDetail />} />
+              <Route path="/characters/:uid" element={<CharacterDetail />} />
+              <Route path="/vehicles/:uid" element={<VehicleDetail />} />
+              <Route path="/planets/:uid" element={<PlanetDetail />} />
 
-            <Route path="*" element={<h1>Not found!</h1>} />
-          </Routes>
+              <Route path="*" element={<h1>Not found!</h1>} />
+            </Routes>
+          </main>
           <Footer />
         </ScrollToTop>
       </BrowserRouter>

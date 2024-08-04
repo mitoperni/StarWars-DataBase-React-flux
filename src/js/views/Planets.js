@@ -16,7 +16,7 @@ function Planets() {
           These are the main <strong>planets</strong> from Star Wars:
         </h2>
       </div>
-      <div className="row mx-3">
+      <div className="row mx-3 mt-3">
         {store.planets?.map((planet) => (
           <div
             key={planet.uid}
