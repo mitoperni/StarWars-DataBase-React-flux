@@ -22,7 +22,7 @@ function Planets() {
             key={planet.uid}
             className="col-12 col-md-6 col-lg-4 col-xl-3 my-3"
           >
-            <Card name={planet.name} uid={planet.uid} type="planets" />
+            <Card name={planet.name} uid={planet.uid} type="planets" img={actions.getUrlImgPlanet(planet.uid)} />
           </div>
         ))}
       </div>

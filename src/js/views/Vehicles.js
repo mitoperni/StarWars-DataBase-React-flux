@@ -22,7 +22,7 @@ function Vehicles() {
             key={vehicle.uid}
             className="col-12 col-md-6 col-lg-4 col-xl-3 my-3"
           >
-            <Card name={vehicle.name} uid={vehicle.uid} type="vehicles" />
+            <Card name={vehicle.name} uid={vehicle.uid} type="vehicles" img={`https://starwars-visualguide.com/assets/img/vehicles/${vehicle.uid}.jpg`}/>
           </div>
         ))}
       </div>

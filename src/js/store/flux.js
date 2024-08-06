@@ -62,6 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("getPlanets ha fallado", error);
         }
       },
+
+
       saveToFav: (uid, type) => {
         const store = getStore();
         let arr;
@@ -93,9 +95,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ favorites: updatedFavorites });
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       },
+
+
       getCharacterDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({character: []})
+        setStore({ character: [] });
 
         try {
           const response = await axios.get(
@@ -113,7 +117,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getVehicleDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({vehicle: []})
+        setStore({ vehicle: [] });
         try {
           const response = await axios.get(
             `https://www.swapi.tech/api/vehicles/${uid}`
@@ -130,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getPlanetDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({planet: []})
+        setStore({ planet: [] });
         try {
           const response = await axios.get(
             `https://www.swapi.tech/api/planets/${uid}`
@@ -148,16 +152,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       // Funciones adicionales:
       getHomeWorldName: async (homeworld) => {
-        setStore({homeworld: ""})
+        setStore({ homeworld: "" });
 
         try {
           const response = await axios.get(`${homeworld}`);
           if (response) {
             console.log(response);
-            setStore({homeworld: response.data.result.properties.name});
+            setStore({ homeworld: response.data.result.properties.name });
           }
         } catch (error) {
           console.error(error);
+        }
+      },
+
+      // Funciones para obtener las imagenes
+      getUrlImgCharacter: (id) => {
+          return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+      },
+      getUrlImgVehicle: (id) => {
+          return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`;
+      },
+      getUrlImgPlanet: (id) => {
+        if (id === "1") {
+          return "https://upload.wikimedia.org/wikipedia/en/6/6d/Tatooine_%28fictional_desert_planet%29.jpg";
+        } else {
+          return `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`;
         }
       },
     },

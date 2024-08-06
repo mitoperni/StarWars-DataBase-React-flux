@@ -10,7 +10,7 @@ const Card = (props) => {
     <div className="card star-wars-card">
       <img
         className="card-img-top img-fluid"
-        src="https://placehold.co/400"
+        src={props.img}
         alt="Card image cap"
         onClick={() => navigate(`/${props.type}/${props.uid}`)}
         style={{ cursor: "pointer" }}
