@@ -15,7 +15,7 @@ function Favorites() {
       <div className="row mx-3 mt-3">
         {store.favorites?.map((favorite) => (
           <div key={favorite.uid} className="col-12 col-md-6 col-lg-4 col-xl-3 my-3">
-            <CardFavorites name={favorite.name} uid={favorite.uid} />
+            <CardFavorites name={favorite.name} uid={favorite.uid} type={favorite.type} />
           </div>
         ))}
       </div>

@@ -7,9 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       vehicles: JSON.parse(localStorage.getItem("vehicles")) || [],
       planets: JSON.parse(localStorage.getItem("planets")) || [],
       favorites: JSON.parse(localStorage.getItem("favorites")) || [],
-      character: null,
-      vehicle: null,
-      planet: null,
+      character: JSON.parse(localStorage.getItem("character")) || null,
+      vehicle: JSON.parse(localStorage.getItem("vehicle")) || null,
+      planet: JSON.parse(localStorage.getItem("planet")) || null,
       loading: true,
       homeworld: "",
     },
@@ -63,7 +63,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-
       saveToFav: (uid, type) => {
         const store = getStore();
         let arr;
@@ -79,14 +78,17 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Elemento no encontrado en el array");
           return;
         }
-        if (store.favorites.some((fav) => fav.uid === uid)) {
+        if (
+          store.favorites.some((fav) => fav.uid === uid && fav.type === type)
+        ) {
           console.log("El elemento ya está en favoritos");
           return;
         }
-        const updatedFavorites = [...store.favorites, newFav];
+        const updatedFavorites = [...store.favorites, { ...newFav, type }];
         setStore({ favorites: updatedFavorites });
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       },
+
       removeFromFav: (uid) => {
         const store = getStore();
         const updatedFavorites = store.favorites.filter(
@@ -96,17 +98,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       },
 
-
       getCharacterDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({ character: [] });
+        let character = JSON.parse(localStorage.getItem(`character_${uid}`));
+        if (character) {
+          setStore({ character });
+          setStore({ loading: false });
+          return;
+        }
 
         try {
           const response = await axios.get(
             `https://www.swapi.tech/api/people/${uid}`
           );
           if (response && response.data && response.data.result) {
-            setStore({ character: response.data.result });
+            character = response.data.result;
+            setStore({ character });
+            localStorage.setItem(`character_${uid}`, JSON.stringify(character));
             console.log(response.data);
           }
         } catch (error) {
@@ -117,13 +125,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getVehicleDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({ vehicle: [] });
+        let vehicle = JSON.parse(localStorage.getItem(`vehicle_${uid}`));
+        if (vehicle) {
+          setStore({ vehicle });
+          setStore({ loading: false });
+          return;
+        }
+
         try {
           const response = await axios.get(
             `https://www.swapi.tech/api/vehicles/${uid}`
           );
           if (response && response.data && response.data.result) {
-            setStore({ vehicle: response.data.result });
+            vehicle = response.data.result;
+            setStore({ vehicle });
+            localStorage.setItem(`vehicle_${uid}`, JSON.stringify(vehicle));
             console.log(response.data);
           }
         } catch (error) {
@@ -134,13 +150,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getPlanetDetails: async (uid) => {
         setStore({ loading: true });
-        setStore({ planet: [] });
+        let planet = JSON.parse(localStorage.getItem(`planet_${uid}`));
+        if (planet) {
+          setStore({ planet });
+          setStore({ loading: false });
+          return;
+        }
+
         try {
           const response = await axios.get(
             `https://www.swapi.tech/api/planets/${uid}`
           );
           if (response && response.data && response.data.result) {
-            setStore({ planet: response.data.result });
+            planet = response.data.result;
+            setStore({ planet });
+            localStorage.setItem(`planet_${uid}`, JSON.stringify(planet));
             console.log(response.data);
           }
         } catch (error) {
@@ -167,10 +191,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       // Funciones para obtener las imagenes
       getUrlImgCharacter: (id) => {
-          return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
+        return `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
       },
       getUrlImgVehicle: (id) => {
-          return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`;
+        return `https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`;
       },
       getUrlImgPlanet: (id) => {
         if (id === "1") {

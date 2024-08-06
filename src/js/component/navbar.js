@@ -14,13 +14,13 @@ export const Navbar = () => {
       const results = [
         ...store.characters
           .filter((char) => char.name.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map((char) => ({ ...char, type: 'character' })),
+          .map((char) => ({ ...char, type: 'characters' })),
         ...store.vehicles
           .filter((vehicle) => vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map((vehicle) => ({ ...vehicle, type: 'vehicle' })),
+          .map((vehicle) => ({ ...vehicle, type: 'vehicles' })),
         ...store.planets
           .filter((planet) => planet.name.toLowerCase().includes(searchTerm.toLowerCase()))
-          .map((planet) => ({ ...planet, type: 'planet' })),
+          .map((planet) => ({ ...planet, type: 'planets' })),
       ];
       setSearchResults(results);
     } else {
@@ -31,29 +31,13 @@ export const Navbar = () => {
   const handleSearch = (item) => {
     setSearchTerm("");
     setSearchResults([]);
-    switch (item.type) {
-      case 'character':
-        navigate(`/characters/${item.uid}`);
-        break;
-      case 'vehicle':
-        navigate(`/vehicles/${item.uid}`);
-        break;
-      case 'planet':
-        navigate(`/planets/${item.uid}`);
-        break;
-      default:
-        break;
-    }
+    navigate(`/${item.type}/${item.uid}`);
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3 px-3">
       <Link to="/" className="navbar-brand">
-        <img
-          src={starWarsLogo}
-          alt="Death Star png"
-          height="60"
-        />
+        <img src={starWarsLogo} alt="Death Star png" height="60" />
       </Link>
       <button
         className="navbar-toggler"
@@ -66,10 +50,7 @@ export const Navbar = () => {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div
-        className="collapse navbar-collapse justify-content-end"
-        id="navbarNav"
-      >
+      <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
             <div className="position-relative">
@@ -81,10 +62,7 @@ export const Navbar = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchResults.length > 0 && (
-                <ul
-                  className="list-group position-absolute w-100"
-                  style={{ zIndex: 1000 }}
-                >
+                <ul className="list-group position-absolute w-100" style={{ zIndex: 1000 }}>
                   {searchResults.map((item) => (
                     <li
                       key={item.uid}
@@ -133,7 +111,7 @@ export const Navbar = () => {
                       className="dropdown-item d-flex justify-content-between align-items-center"
                       key={index}
                     >
-                      <span className="text-light">{fav.name}</span>
+                      <span className="text-light" onClick={() => navigate(`/${fav.type}/${fav.uid}`)}>{fav.name}</span>
                       <button
                         type="button"
                         className="btn btn-danger btn-sm ms-2"
@@ -145,10 +123,7 @@ export const Navbar = () => {
                   ))
                 )}
                 <li>
-                  <Link
-                    to="/favorites"
-                    className="dropdown-item text-center text-light"
-                  >
+                  <Link to="/favorites" className="dropdown-item text-center text-light">
                     View All
                   </Link>
                 </li>
