@@ -24,6 +24,18 @@ const VehicleDetail = () => {
     return <div className="container mt-5 alert alert-danger">Vehicle not found</div>;
   }
 
+  const isFavorite = store.favorites.some(
+    fav => fav.uid === uid && fav.type === 'vehicles'
+  );
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      actions.removeFromFav(uid);
+    } else {
+      actions.saveToFav(uid, 'vehicles');
+    }
+  };
+
   const {
     name,
     model,
@@ -92,6 +104,14 @@ const VehicleDetail = () => {
             </p>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-center mt-5">
+        <button
+          className={`star-wars-btn ${isFavorite ? 'star-wars-btn-remove' : 'star-wars-btn-add'}`}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
       </div>
     </div>
   );  

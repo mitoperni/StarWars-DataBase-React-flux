@@ -6,34 +6,40 @@ const Card = (props) => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
+  const isFavorite = store.favorites.some(
+    fav => fav.uid === props.uid && fav.type === props.type
+  );
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      actions.removeFromFav(props.uid);
+    } else {
+      actions.saveToFav(props.uid, props.type);
+    }
+  };
+
   return (
-    <div className="card star-wars-card">
+    <div className="star-wars-card">
       <img
-        className="card-img-top img-fluid"
+        className="star-wars-card-image"
         src={props.img}
-        alt="Card image cap"
+        alt={props.name}
         onClick={() => navigate(`/${props.type}/${props.uid}`)}
-        style={{ cursor: "pointer" }}
       />
-      <div className="card-body">
-        <h5 className="card-title star-wars-title">{props.name}</h5>
-        <div className="row d-flex justify-content-between align-items-center">
+      <div className="star-wars-card-content">
+        <h3 className="star-wars-card-title">{props.name}</h3>
+        <div className="star-wars-card-buttons">
           <button
-            type="button"
-            className="btn btn-warning px-1 col-8 mb-3 col-sm-6 mb-sm-0 col-md-6 col-xl-6 col-xxl-4"
-            onClick={() => {
-              actions.saveToFav(props.uid, props.type);
-            }}
+            className={`star-wars-btn ${isFavorite ? 'star-wars-btn-remove' : 'star-wars-btn-add'}`}
+            onClick={handleFavoriteClick}
           >
-            Add to Favorites
+            {isFavorite ? 'Remove' : 'Add to Favorites'}
           </button>
-          <br className="d-sm-none" />
           <button
-            type="button"
-            className="btn btn-outline-info px-1 col-8 mb-3 col-sm-6 mb-sm-0 col-md-6 col-xl-6 col-xxl-4"
+            className="star-wars-btn star-wars-btn-details"
             onClick={() => navigate(`/${props.type}/${props.uid}`)}
           >
-            See more details
+            Details
           </button>
         </div>
       </div>

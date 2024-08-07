@@ -14,14 +14,47 @@ body {
 }
 
 .star-wars-card {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   border: 2px solid #feda4a;
   border-radius: 10px;
   box-shadow: 0 0 20px #feda4a;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.star-wars-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px #feda4a;
+}
+
+.star-wars-card-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.star-wars-card:hover .star-wars-card-image {
+  opacity: 0.7;
+}
+
+.star-wars-card-content {
+  padding: 15px;
 }
 
 .star-wars-title {
   font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #feda4a;
+}
+
+.star-wars-card-title {
+  color: #feda4a;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 0 0 10px #feda4a;
@@ -39,7 +72,6 @@ body {
   font-size: 1.2rem;
   text-transform: uppercase;
   text-shadow: 0 0 10px #91e0ec;
-
 }
 
 .star-wars-text {
@@ -61,6 +93,88 @@ body {
   color: #feda4a;
   width: 3rem;
   height: 3rem;
+}
+
+.star-wars-card-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.star-wars-btn {
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border: 2px solid;
+  transition: all 0.3s ease;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-grow: 1;
+  margin: 0 5px;
+  max-width: 300px;
+}
+
+.star-wars-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(254, 218, 74, 0.5);
+}
+
+.star-wars-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.star-wars-btn-add {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  color: #000;
+}
+
+.star-wars-btn-remove {
+  background-color: #f44336;
+  border-color: #f44336;
+  color: #000;
+}
+
+.star-wars-btn-details {
+  background-color: #2196F3;
+  border-color: #2196F3;
+  color: #000;
+}
+
+.star-wars-btn-warning {
+  background-color: #feda4a;
+  border-color: #feda4a;
+  color: #000;
+}
+
+.star-wars-btn-warning:hover {
+  background-color: #000;
+  color: #feda4a;
+}
+
+.star-wars-btn-danger {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
+  color: #000;
+}
+
+.star-wars-btn-danger:hover {
+  background-color: #000;
+  color: #ff6b6b;
+}
+
+.star-wars-btn-info {
+  background-color: #5ac5d6;
+  border-color: #5ac5d6;
+  color: #000;
+}
+
+.star-wars-btn-info:hover {
+  background-color: #000;
+  color: #5ac5d6;
 }
 
 #root {

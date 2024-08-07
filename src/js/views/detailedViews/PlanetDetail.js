@@ -24,6 +24,18 @@ const PlanetDetail = () => {
     return <div className="container mt-5 alert alert-danger">Planet not found</div>;
   }
 
+  const isFavorite = store.favorites.some(
+    fav => fav.uid === uid && fav.type === 'planets'
+  );
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      actions.removeFromFav(uid);
+    } else {
+      actions.saveToFav(uid, 'planets');
+    }
+  };
+
   const {
     name,
     diameter,
@@ -84,6 +96,14 @@ const PlanetDetail = () => {
             </p>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-center mt-5">
+        <button
+          className={`star-wars-btn ${isFavorite ? 'star-wars-btn-remove' : 'star-wars-btn-add'}`}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
       </div>
     </div>
   );  
