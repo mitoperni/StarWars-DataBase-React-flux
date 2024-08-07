@@ -41,6 +41,36 @@ const CharacterDetail = () => {
     );
   }
 
+  const isFavorite = store.favorites.some(
+    fav => fav.uid === uid && fav.type === 'characters'
+  );
+
+  const handleFavoriteClick = () => {
+    if (isFavorite) {
+      actions.removeFromFav(uid);
+    } else {
+      actions.saveToFav(uid, 'characters');
+    }
+  };
+
+  if (store.loading) {
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border star-wars-spinner" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!store.character) {
+    return (
+      <div className="container mt-5 alert alert-danger">
+        Character not found
+      </div>
+    );
+  }
+
   const {
     name,
     height,
@@ -55,6 +85,7 @@ const CharacterDetail = () => {
 
   return (
     <div className="container mt-5">
+      
       <div className="star-wars-card p-4">
         <div className="row d-flex align-items-center">
           <div className="col-md-4">
@@ -107,6 +138,14 @@ const CharacterDetail = () => {
             </p>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-center mt-4">
+        <button
+          className={`star-wars-btn ${isFavorite ? 'star-wars-btn-remove' : 'star-wars-btn-add'}`}
+          onClick={handleFavoriteClick}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
       </div>
     </div>
   );
