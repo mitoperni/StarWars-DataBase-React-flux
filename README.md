@@ -63,15 +63,12 @@ The application should now be running on `http://localhost:3000`.
 
 Navigate through the different sections using the top menu. Use the search bar to find specific characters, vehicles, or planets. Click on any item to view detailed information. Add items to your favorites for quick access.
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ## Acknowledgments
 
 - Data provided by [SWAPI](https://swapi.dev/)
-- Built with love by [Your Name]
+- Built with love by [Mitoperni]
+
+## Contributors
+
+The template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
+
