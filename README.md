@@ -1,37 +1,41 @@
-# Star Wars Database Web Application
+# 🌟 Star Wars Database Web Application
 
-![Star Wars Database](https://res.cloudinary.com/dg7u2cizh/image/upload/v1728731256/Captura_de_pantalla_2024-10-12_112648_ijrhux.png)
+<p align="center">
+  <img src="https://res.cloudinary.com/dg7u2cizh/image/upload/v1728731256/Captura_de_pantalla_2024-10-12_112648_ijrhux.png" alt="Star Wars Database" width="600">
+</p>
 
-## Overview
+## 🔗 Quick Links
+- 🚀 **Live Demo:** [Star Wars Database App](your-deployed-app-url-here)
+- 💻 **Repository:** [GitHub](https://github.com/your-username/star-wars-database)
+- 📹 **Demo Video:** [Watch on YouTube](your-demo-video-url-here)
 
-This Star Wars Database app offers an immersive experience for fans to explore the rich universe of Star Wars. Built with React and powered by the Star Wars API (SWAPI), this application provides detailed information on characters, vehicles, and planets from the Star Wars universe.
+## 📝 Description
 
-## Features
+The Star Wars Database app offers an immersive experience for fans to explore the rich universe of Star Wars. Built with React and powered by the Star Wars API (SWAPI), this application provides detailed information on characters, vehicles, and planets from the Star Wars universe.
 
+### ✨ Features
 - **Interactive UI**: User-friendly interface with sections for Characters, Vehicles, and Planets.
 - **Detailed Information**: In-depth data on various Star Wars entities.
 - **Search Functionality**: Quick access to specific entries.
 - **Favorites System**: Mark and easily access your preferred Star Wars elements.
 - **Responsive Design**: Seamless experience across all devices.
 
-## Tech Stack
+## 🖥️ Technologies Used
 
-- Frontend: React.js
-- State Management: Redux
-- Styling: CSS3 with Bootstrap
-- API Integration: Axios for fetching data from SWAPI
-- Routing: React Router
-- Version Control: Git
+- **Frontend:** ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- **State Management:** ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+- **Styling:** ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+- **API Integration:** ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+- **Routing:** ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+- **Version Control:** ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
-
 - Node.js (v10 or later)
 - npm
 
 ### Installation
-
 1. Clone the repository:
    ```
    git clone https://github.com/your-username/star-wars-database.git
