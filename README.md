@@ -70,7 +70,6 @@ Navigate through the different sections using the top menu. Use the search bar t
 ## Acknowledgments
 
 - Data provided by [SWAPI](https://swapi.dev/)
-- Built with love by [Mitoperni]
 
 ## Contributors
 
